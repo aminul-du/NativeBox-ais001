@@ -6,8 +6,8 @@ MODE="${1:---preflight}"
 case "$MODE" in
   --preflight)
     echo "Preflight only; no services will be started."
-    ./scripts/validate-compose.sh .env.example
-    ./scripts/audit-repo.sh || { echo "Repository incomplete. Deployment blocked." >&2; exit 1; }
+    bash scripts/validate-compose.sh .env.example
+    bash scripts/audit-repo.sh || { echo "Repository incomplete. Deployment blocked." >&2; exit 1; }
     echo "Preflight complete. No deployment performed."
     ;;
   --apply)
@@ -16,12 +16,12 @@ case "$MODE" in
     [[ -z "$(git status --porcelain)" ]] || { echo "Blocked: working tree must be clean." >&2; exit 3; }
     read -r -p "Type AIS-APPROVE to start the approved deployment: " approval
     [[ "$approval" == "AIS-APPROVE" ]] || { echo "Cancelled."; exit 4; }
-    ./scripts/audit-repo.sh
-    ./scripts/validate-compose.sh .env
+    bash scripts/audit-repo.sh
+    bash scripts/validate-compose.sh .env
     docker compose --env-file .env -f docker-compose.yml up -d --build
     echo "Compose command completed. Production is not accepted until external checks pass."
     ;;
   *)
-    echo "Usage: scripts/deploy.sh [--preflight|--apply]" >&2; exit 2
+    echo "Usage: bash scripts/deploy.sh [--preflight|--apply]" >&2; exit 2
     ;;
 esac
