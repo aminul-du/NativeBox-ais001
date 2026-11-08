@@ -12,7 +12,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Validate Compose configuration only
         run: docker compose --env-file .env.example -f docker-compose.yml config --quiet
