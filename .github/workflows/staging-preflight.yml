@@ -1,0 +1,39 @@
+name: MCore Staging Preflight
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Validate Compose configuration only
+        run: docker compose --env-file .env.example -f docker-compose.yml config --quiet
+
+      - name: Detect missing application deliverables
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          for path in apps/web/Dockerfile apps/sandbox/Dockerfile services/orchestrator/Dockerfile; do
+            if [[ -f "$path" ]]; then
+              echo "[FOUND] $path"
+            else
+              echo "[MISSING] $path"
+              missing=1
+            fi
+          done
+          if [[ "$missing" -ne 0 ]]; then
+            echo "Preflight blocked: import and inspect the application ZIP before building or deploying."
+            exit 1
+          fi
+
+      - name: Explicitly report no deployment
+        run: echo "Preflight only. No services, DNS records, tunnels, or production resources were changed."
