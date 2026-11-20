@@ -25,3 +25,5 @@ coverage/
 htmlcov/
 .idea/
 .vscode/
+apps/web/.wrangler/
+evidence/
