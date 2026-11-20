@@ -1,0 +1,67 @@
+
+==================================================
+MCORE SHORBORNO NATIVEBOX MASTER UPGRADE
+==================================================
+Timestamp: 20261120T200059Z
+Project: /srv/mcore/shorbornoBD-NativeBox
+Source inventory root: /srv/mcore
+Mode: SAFE LOCAL ENGINEERING / READ-ONLY SOURCE RECONCILIATION
+
+==================================================
+1. GIT BASELINE
+==================================================
+## main...origin/main
+ M scripts/audit-repo.sh
+?? config/
+?? docs/architecture/
+?? docs/operations/
+?? evidence/
+?? registry/
+?? scripts/nativebox-organize.sh
+HEAD: 7f3397ef5efe3ef0b088dedfa8acc842c8aa2b4e
+Commit: Merge pull request #1 from aminul-du/feat/mcore-onecmd-delivery-001
+Remotes:
+origin
+upstream
+[PASS] Git main branch identified
+[PASS] Git whitespace check
+
+==================================================
+2. REQUIRED PROJECT STRUCTURE
+==================================================
+[PASS] README.md
+[PASS] .gitignore
+[PASS] .env.example
+[PASS] docker-compose.yml
+[PASS] Makefile
+[PASS] docs/architecture/MCORE-SHORBORNO-MONOREPO-ARCH-001.md
+[PASS] docs/operations/zero-gap-closure.md
+[PASS] docs/operations/security-boundary.md
+[PASS] config/project.yaml
+[PASS] registry/cloudflare-resources.yaml
+[PASS] registry/local-migration-manifest.tsv
+[PASS] infra/cloudflare/README.md
+[PASS] scripts/audit-repo.sh
+[PASS] scripts/audit-zip.sh
+[PASS] scripts/deploy.sh
+[PASS] scripts/validate-compose.sh
+
+==================================================
+3. SHELL SCRIPT VALIDATION
+==================================================
+[PASS] Bash syntax: scripts/deploy.sh
+[PASS] Bash syntax: scripts/validate-compose.sh
+[PASS] Bash syntax: scripts/audit-zip.sh
+[PASS] Bash syntax: scripts/nativebox-organize.sh
+[PASS] Bash syntax: scripts/audit-repo.sh
+
+==================================================
+4. DOCKER COMPOSE VALIDATION
+==================================================
+[PASS] Docker Compose configuration
+Resolved services: 5
+[FAIL] Missing Dockerfile: orchestrator /srv/mcore/shorbornoBD-NativeBox/services/orchestrator/Dockerfile
+[INFO] Service has no local build: postgres
+[INFO] Service has no local build: qdrant
+[FAIL] Missing Dockerfile: sandbox /srv/mcore/shorbornoBD-NativeBox/apps/sandbox/Dockerfile
+[FAIL] Missing Dockerfile: web /srv/mcore/shorbornoBD-NativeBox/apps/web/Dockerfile

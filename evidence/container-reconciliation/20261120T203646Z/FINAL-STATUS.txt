@@ -1,0 +1,3 @@
+[BLOCKED] Unresolved build context/Dockerfile/image. No partial stack will start.
+CONTAINERS_STARTED=NO
+EVIDENCE=/srv/mcore/shorbornoBD-NativeBox/evidence/container-reconciliation/20261120T203646Z

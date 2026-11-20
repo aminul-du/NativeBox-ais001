@@ -1,0 +1,64 @@
+# PROVISIONAL SKELETON. App build contexts must be supplied by ZIP audit.
+services:
+  web:
+    build:
+      context: ./apps/web
+    environment:
+      APP_ENV: ${APP_ENV:-staging}
+    expose: ["3000"]
+    networks: [edge, app_internal]
+    restart: unless-stopped
+
+  sandbox:
+    build:
+      context: ./apps/sandbox
+    expose: ["8000"]
+    networks: [app_internal]
+    restart: unless-stopped
+
+  orchestrator:
+    build:
+      context: ./services/orchestrator
+    networks: [app_internal]
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mcore}
+      POSTGRES_USER: ${POSTGRES_USER:-mcore}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-only-not-for-production}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    networks: [app_internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mcore -d mcore"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    volumes: [qdrant_data:/qdrant/storage]
+    networks: [app_internal]
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["edge"]
+    command: ["tunnel", "--no-autoupdate", "run"]
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    networks: [edge]
+    restart: unless-stopped
+
+networks:
+  edge:
+    driver: bridge
+  app_internal:
+    driver: bridge
+    internal: true
+
+volumes:
+  postgres_data:
+  qdrant_data:

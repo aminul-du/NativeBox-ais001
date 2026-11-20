@@ -1,0 +1,120 @@
+{
+  "name": "shorbornobd-nativebox",
+  "networks": {
+    "app_internal": {
+      "name": "shorbornobd-nativebox_app_internal",
+      "driver": "bridge",
+      "ipam": {},
+      "internal": true
+    },
+    "edge": {
+      "name": "shorbornobd-nativebox_edge",
+      "driver": "bridge",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "orchestrator": {
+      "build": {
+        "context": "/srv/mcore/shorbornoBD-NativeBox/services/orchestrator",
+        "dockerfile": "Dockerfile"
+      },
+      "command": null,
+      "entrypoint": null,
+      "networks": {
+        "app_internal": null
+      },
+      "restart": "unless-stopped"
+    },
+    "postgres": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "POSTGRES_DB": "mcore",
+        "POSTGRES_PASSWORD": "local-only-not-for-production",
+        "POSTGRES_USER": "mcore"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD-SHELL",
+          "pg_isready -U mcore -d mcore"
+        ],
+        "timeout": "5s",
+        "interval": "10s",
+        "retries": 5
+      },
+      "image": "postgres:16-alpine",
+      "networks": {
+        "app_internal": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "postgres_data",
+          "target": "/var/lib/postgresql/data",
+          "volume": {}
+        }
+      ]
+    },
+    "qdrant": {
+      "command": null,
+      "entrypoint": null,
+      "image": "qdrant/qdrant:latest",
+      "networks": {
+        "app_internal": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "qdrant_data",
+          "target": "/qdrant/storage",
+          "volume": {}
+        }
+      ]
+    },
+    "sandbox": {
+      "build": {
+        "context": "/srv/mcore/shorbornoBD-NativeBox/apps/sandbox",
+        "dockerfile": "Dockerfile"
+      },
+      "command": null,
+      "entrypoint": null,
+      "expose": [
+        "8000"
+      ],
+      "networks": {
+        "app_internal": null
+      },
+      "restart": "unless-stopped"
+    },
+    "web": {
+      "build": {
+        "context": "/srv/mcore/shorbornoBD-NativeBox/apps/web",
+        "dockerfile": "Dockerfile"
+      },
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "APP_ENV": "staging"
+      },
+      "expose": [
+        "3000"
+      ],
+      "networks": {
+        "app_internal": null,
+        "edge": null
+      },
+      "restart": "unless-stopped"
+    }
+  },
+  "volumes": {
+    "postgres_data": {
+      "name": "shorbornobd-nativebox_postgres_data"
+    },
+    "qdrant_data": {
+      "name": "shorbornobd-nativebox_qdrant_data"
+    }
+  }
+}

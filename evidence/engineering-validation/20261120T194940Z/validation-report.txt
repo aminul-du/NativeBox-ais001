@@ -1,0 +1,79 @@
+============================================
+ SHORBORNO NATIVEBOX ENGINEERING VALIDATION
+============================================
+
+1. GIT BASELINE
+## main...origin/main
+?? config/
+?? docs/architecture/
+?? docs/operations/
+?? evidence/
+?? registry/
+?? scripts/nativebox-organize.sh
+Commit: 7f3397e Merge pull request #1 from aminul-du/feat/mcore-onecmd-delivery-001
+origin
+upstream
+
+2. REQUIRED ARCHITECTURE FILES
+PASS: docs/architecture/MCORE-SHORBORNO-MONOREPO-ARCH-001.md
+PASS: config/project.yaml
+PASS: registry/cloudflare-resources.yaml
+PASS: registry/local-migration-manifest.tsv
+PASS: scripts/nativebox-organize.sh
+PASS: docs/operations/zero-gap-closure.md
+PASS: docs/operations/security-boundary.md
+PASS: infra/cloudflare/README.md
+
+3. SHELL SCRIPT SYNTAX
+PASS: scripts/deploy.sh
+PASS: scripts/validate-compose.sh
+PASS: scripts/audit-zip.sh
+PASS: scripts/nativebox-organize.sh
+/srv/mcore/shorbornoBD-NativeBox/scripts/audit-repo.sh: line 27: syntax error near unexpected token `('
+/srv/mcore/shorbornoBD-NativeBox/scripts/audit-repo.sh: line 27: ` | grep -vE '(^|/)\.env\.example'
+FAIL: scripts/audit-repo.sh
+
+4. GIT WHITESPACE VALIDATION
+PASS: Existing tracked-file diff check completed
+
+5. DOCKER COMPOSE VALIDATION
+PASS: Docker Compose configuration valid
+
+6. YAML VALIDATION
+NOT VERIFIED: PyYAML unavailable; no package installed.
+
+7. DOMAIN CONFIGURATION REVIEW
+/srv/mcore/shorbornoBD-NativeBox/config/project.yaml:25:  primary_legacy_domain: "sorbornoai.com"
+/srv/mcore/shorbornoBD-NativeBox/config/project.yaml:26:  second_domain: "UNVERIFIED_PENDING_AIS_CONFIRMATION"
+/srv/mcore/shorbornoBD-NativeBox/config/project.yaml:44:  production_authorized: false
+/srv/mcore/shorbornoBD-NativeBox/registry/cloudflare-resources.yaml:19:    redirect_target: "NOT_YET_VERIFIED"
+
+8. MIGRATION MANIFEST
+110 /srv/mcore/shorbornoBD-NativeBox/registry/local-migration-manifest.tsv
+source	destination	classification	status
+/srv/mcore/AIS-PRO/sandbox/drive-evidence/cloudflare/config.yml	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/components/ShorbornoVoiceRoomClient.tsx	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/components/ShorbornoVoiceRoom.tsx	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-bkJokA/bundledWorker-0.3057645245249009.mjs	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-bkJokA/bundledWorker-0.3057645245249009.mjs.map	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-bkJokA/__next-on-pages-dist__/cache/adaptor.js	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-bkJokA/__next-on-pages-dist__/cache/cache-api.js	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-bkJokA/__next-on-pages-dist__/cache/kv.js	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-bkJokA/__next-on-pages-dist__/functions/api/livekit/token.func.js	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-BldySX/bundledWorker-0.2636476179507985.mjs	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+/srv/mcore/apps/web/.wrangler/tmp/pages-BldySX/bundledWorker-0.2636476179507985.mjs.map	REQUIRES_DESTINATION_REVIEW	candidate	pending-review
+
+9. DEPLOYMENT SAFETY
+DNS changes: NOT EXECUTED
+Tunnel changes: NOT EXECUTED
+Git push: NOT EXECUTED
+Production deployment: NOT EXECUTED
+Paid provisioning: NOT EXECUTED
+
+10. VALIDATION EVIDENCE
+/srv/mcore/shorbornoBD-NativeBox/evidence/engineering-validation/20261120T194940Z/validation-report.txt
+
+============================================
+ ENGINEERING VALIDATION FINISHED
+ REVIEW GAPS BEFORE MIGRATION OR DEPLOYMENT
+============================================

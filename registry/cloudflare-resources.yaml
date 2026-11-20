@@ -1,0 +1,45 @@
+schema_version: "1.0"
+project: "MCORE-SHORBORNO-NATIVEBOX"
+
+policy:
+  source_of_truth: "verified-observed-cloudflare-state"
+  remote_resources_are_not_local_files: true
+  preserve_existing_dns: true
+  preserve_existing_redirect: true
+  preserve_existing_tunnel: true
+  write_operations_authorized: false
+
+account:
+  account_id: "NOT_RECORDED"
+  status: "pending-evidence"
+
+domains:
+  - name: "sorbornoai.com"
+    role: "legacy-domain"
+    redirect_target: "NOT_YET_VERIFIED"
+    dns_status: "unknown"
+  - name: "SECOND_DOMAIN"
+    role: "redirect-domain"
+    dns_status: "unknown"
+
+resources:
+  workers:
+    status: "pending-inventory"
+    local_configuration: "infra/cloudflare/workers/"
+  pages:
+    status: "pending-inventory"
+  d1:
+    status: "pending-inventory"
+  kv:
+    status: "pending-inventory"
+  tunnels:
+    status: "existing-connection-preserved"
+    modification_authorized: false
+  workers_ai:
+    status: "remote-service"
+    local_adapter: "ai/workers-ai/"
+
+evidence:
+  inventory_report: null
+  collected_at: null
+  verification_status: "not-yet-reconciled"

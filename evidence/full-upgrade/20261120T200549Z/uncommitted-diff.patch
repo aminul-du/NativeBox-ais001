@@ -1,0 +1,121 @@
+diff --git a/scripts/audit-repo.sh b/scripts/audit-repo.sh
+old mode 100644
+new mode 100755
+index 56e01d8..64509a8
+--- a/scripts/audit-repo.sh
++++ b/scripts/audit-repo.sh
+@@ -1,54 +1,76 @@
+ #!/usr/bin/env bash
+ set -Eeuo pipefail
+-ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
++
++SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
++ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+ cd "$ROOT"
+-required=(README.md .gitignore .env.example docker-compose.yml Makefile scripts/audit-repo.sh scripts/validate-compose.sh scripts/deploy.sh .github/workflows/ci.yml docs/deployment/staged-rollout.md apps/web/Dockerfile apps/sandbox/Dockerfile services/orchestrator/Dockerfile infra/cloudflare/README.md)
++
++g() {
++  git -c safe.directory="$ROOT" -C "$ROOT" "$@"
++}
++
++required=(
++  README.md
++  .gitignore
++  .env.example
++  docker-compose.yml
++  Makefile
++  scripts/audit-repo.sh
++  scripts/validate-compose.sh
++  scripts/deploy.sh
++  .github/workflows/ci.yml
++  docs/deployment/staged-rollout.md
++  apps/web/Dockerfile
++  apps/sandbox/Dockerfile
++  services/orchestrator/Dockerfile
++  infra/cloudflare/README.md
++)
++
+ missing=0
+-printf 'MCORE-ONECMD-DELIVERY-001 repository audit\nRoot: %s\n\n' "$ROOT"
++
++printf 'MCORE-ONECMD-DELIVERY-001 repository audit\n'
++printf 'Root: %s\n\n' "$ROOT"
++
+ for path in "${required[@]}"; do
+-  if [[ -f "$path" ]]; then printf '[FOUND]   %s\n' "$path"
+-  else printf '[MISSING] %s\n' "$path"; missing=$((missing + 1)); fi
++  if [[ -f "$path" ]]; then
++    printf '[FOUND]   %s\n' "$path"
++  else
++    printf '[MISSING] %s\n' "$path"
++    missing=$((missing + 1))
++  fi
+ done
++
+ printf '\nMissing required files: %s\n' "$missing"
+-if git ls-files | grep -E '(^|/)(\.env|\.env\..+|id_rsa|.*\.pem|.*\.key)
+-  printf '[WARN] Potential secret-bearing filename is tracked; inspect history and contents.\n'
++
++secret_paths="$(
++  g ls-files |
++    grep -E '(^|/)(\.env($|\.)|id_rsa|[^/]*\.(pem|key)$)' |
++    grep -vE '(^|/)\.env\.example$' || true
++)"
++
++if [[ -n "$secret_paths" ]]; then
++  printf '[WARN] Potential secret-bearing tracked filenames found:\n'
++  printf '%s\n' "$secret_paths"
++else
++  printf '[PASS] No matching secret-bearing tracked filenames detected.\n'
+ fi
++
+ if [[ -f docker-compose.yml ]] && command -v docker >/dev/null 2>&1; then
+-  docker compose --env-file .env.example -f docker-compose.yml config --quiet || { printf '[FAIL] Compose configuration is invalid.\n'; exit 2; }
++  docker compose --env-file .env.example -f docker-compose.yml config --quiet ||
++    {
++      printf '[FAIL] Compose configuration is invalid.\n'
++      exit 2
++    }
+   printf '[PASS] Compose configuration syntax is valid.\n'
+ elif ! command -v docker >/dev/null 2>&1; then
+   printf '[SKIP] Docker unavailable; Compose validation not run.\n'
+ fi
++
+ if (( missing > 0 )); then
+-  printf '\n[INCOMPLETE] Import and inspect the application ZIP before build/deploy.\n'
++  printf '\n[INCOMPLETE] Required files are missing.\n'
++  printf 'This is not production acceptance.\n'
+   exit 1
+ fi
+-printf '\n[PASS] Required-file presence check passed; not production acceptance.\n'
+- | grep -vE '(^|/)\.env\.example
+-  printf '[WARN] Potential secret-bearing filename is tracked; inspect history and contents.\n'
+-fi
+-if [[ -f docker-compose.yml ]] && command -v docker >/dev/null 2>&1; then
+-  docker compose --env-file .env.example -f docker-compose.yml config --quiet || { printf '[FAIL] Compose configuration is invalid.\n'; exit 2; }
+-  printf '[PASS] Compose configuration syntax is valid.\n'
+-elif ! command -v docker >/dev/null 2>&1; then
+-  printf '[SKIP] Docker unavailable; Compose validation not run.\n'
+-fi
+-if (( missing > 0 )); then
+-  printf '\n[INCOMPLETE] Import and inspect the application ZIP before build/deploy.\n'
+-  exit 1
+-fi
+-printf '\n[PASS] Required-file presence check passed; not production acceptance.\n'
+- >/dev/null; then
+-  printf '[WARN] Potential secret-bearing filename is tracked; inspect history and contents.\n'
+-fi
+-if [[ -f docker-compose.yml ]] && command -v docker >/dev/null 2>&1; then
+-  docker compose --env-file .env.example -f docker-compose.yml config --quiet || { printf '[FAIL] Compose configuration is invalid.\n'; exit 2; }
+-  printf '[PASS] Compose configuration syntax is valid.\n'
+-elif ! command -v docker >/dev/null 2>&1; then
+-  printf '[SKIP] Docker unavailable; Compose validation not run.\n'
+-fi
+-if (( missing > 0 )); then
+-  printf '\n[INCOMPLETE] Import and inspect the application ZIP before build/deploy.\n'
+-  exit 1
+-fi
+-printf '\n[PASS] Required-file presence check passed; not production acceptance.\n'
++
++printf '\n[PASS] Required-file presence check passed.\n'
++printf 'This is not production acceptance.\n'

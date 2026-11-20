@@ -1,0 +1,22 @@
+MCORE SHORBORNO NATIVEBOX MASTER SETUP
+Timestamp: 20261120T194655Z
+Root: /srv/mcore/shorbornoBD-NativeBox
+Owner: mcoreai:mcoreai
+Branch: main
+Commit: 7f3397e
+
+Existing source files preserved.
+Architecture and registry artifacts generated where absent.
+Cloudflare write operations: NOT AUTHORIZED
+DNS changes: NONE
+Tunnel changes: NONE
+Production deployment: NOT PERFORMED
+
+Git status:
+## main...origin/main
+?? config/
+?? docs/architecture/
+?? docs/operations/
+?? evidence/
+?? registry/
+?? scripts/nativebox-organize.sh

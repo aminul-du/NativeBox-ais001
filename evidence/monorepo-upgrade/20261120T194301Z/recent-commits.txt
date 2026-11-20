@@ -1,0 +1,5 @@
+7f3397e 2026-11-08 Merge pull request #1 from aminul-du/feat/mcore-onecmd-delivery-001
+1dd8395 2026-11-08 fix: exclude safe environment template from secret warning
+d7028be 2026-11-08 fix: exclude safe environment template from secret warning
+b74b7e8 2026-11-08 ci: update checkout action runtime
+3179d0b 2026-11-08 ci: update checkout action runtime

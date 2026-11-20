@@ -1,0 +1,5 @@
+/srv/mcore/AIS-PRO/.git
+/srv/mcore/.git
+/srv/mcore/mcore365/.git
+/srv/mcore/mcore-custom-nativebox/.git
+/srv/mcore/shorbornoBD-NativeBox/.git

@@ -1,0 +1,36 @@
+
+[SERVICE] orchestrator
+BUILD_CONTEXT=/srv/mcore/shorbornoBD-NativeBox/services/orchestrator
+CONTEXT_EXISTS=False
+DOCKERFILE=/srv/mcore/shorbornoBD-NativeBox/services/orchestrator/Dockerfile
+DOCKERFILE_EXISTS=False
+
+[SERVICE] postgres
+IMAGE=postgres:16-alpine
+
+[SERVICE] qdrant
+IMAGE=qdrant/qdrant:latest
+
+[SERVICE] sandbox
+BUILD_CONTEXT=/srv/mcore/shorbornoBD-NativeBox/apps/sandbox
+CONTEXT_EXISTS=False
+DOCKERFILE=/srv/mcore/shorbornoBD-NativeBox/apps/sandbox/Dockerfile
+DOCKERFILE_EXISTS=False
+
+[SERVICE] web
+BUILD_CONTEXT=/srv/mcore/shorbornoBD-NativeBox/apps/web
+CONTEXT_EXISTS=True
+DOCKERFILE=/srv/mcore/shorbornoBD-NativeBox/apps/web/Dockerfile
+DOCKERFILE_EXISTS=True
+DEPENDENCY_MANIFESTS=package.json, pnpm-lock.yaml
+DOCKERFILE_DIRECTIVE=FROM node:24-bookworm-slim AS base
+DOCKERFILE_DIRECTIVE=RUN corepack enable && corepack prepare pnpm@11.28.12 --activate
+DOCKERFILE_DIRECTIVE=FROM base AS deps
+DOCKERFILE_DIRECTIVE=COPY package.json pnpm-lock.yaml ./
+DOCKERFILE_DIRECTIVE=COPY pnpm-workspace.yaml ./
+DOCKERFILE_DIRECTIVE=RUN pnpm install --frozen-lockfile
+DOCKERFILE_DIRECTIVE=FROM deps AS builder
+DOCKERFILE_DIRECTIVE=COPY . .
+DOCKERFILE_DIRECTIVE=RUN pnpm build
+DOCKERFILE_DIRECTIVE=FROM base AS runner
+DOCKERFILE_DIRECTIVE=COPY --from=builder /app ./

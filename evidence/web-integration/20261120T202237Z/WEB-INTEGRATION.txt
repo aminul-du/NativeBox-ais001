@@ -1,0 +1,504 @@
+=== MCORE NATIVEBOX WEB + DOCKER INTEGRATION ===
+UTC: 20261120T202237Z
+[PASS] Source package validated
+PNPM_VERSION=11.28.12
+Copied files: 149
+Excluded files: 1
+[PASS] Existing target backup created
+[PASS] Web source integrated
+[PASS] Compose Web context and Dockerfile verified
+=== DOCKER BUILD: WEB ONLY ===
+#0 building with "default" instance using docker driver
+
+#1 [web internal] load build definition from Dockerfile
+#1 transferring dockerfile: 521B done
+#1 DONE 0.0s
+
+#2 [web internal] load metadata for docker.io/library/node:24-bookworm-slim
+#2 DONE 2.5s
+
+#3 [web internal] load .dockerignore
+#3 transferring context: 224B done
+#3 DONE 0.0s
+
+#4 [web base 1/3] FROM docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+#4 resolve docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54 done
+#4 ...
+
+#5 [web internal] load build context
+#5 transferring context: 7.95MB 0.1s done
+#5 DONE 0.1s
+
+#4 [web base 1/3] FROM docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+#4 sha256:0e2646ab57e77b7a384a0cb59b6815b182c77e1f9c3ba36bd8435bd9c4e6680e 1.93kB / 1.93kB done
+#4 sha256:5ba3c1ded6eada2ea16582327a87c672fb3889fca362ee3ac0d78ed742b583c0 6.71kB / 6.71kB done
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 0B / 28.25MB 0.2s
+#4 sha256:22a7c5e442cd30f0c37eb73f2f6d91be1c6b63bd1c4278641b042fe77b260f33 0B / 3.31kB 0.2s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 0B / 51.10MB 0.2s
+#4 sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54 3.93kB / 3.93kB done
+#4 sha256:22a7c5e442cd30f0c37eb73f2f6d91be1c6b63bd1c4278641b042fe77b260f33 3.31kB / 3.31kB 1.0s done
+#4 sha256:e727da478d47d626146e734dd426cad789beb1fe49c55a06a175621d30f31064 0B / 1.71MB 1.1s
+#4 sha256:e727da478d47d626146e734dd426cad789beb1fe49c55a06a175621d30f31064 1.05MB / 1.71MB 4.1s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 1.05MB / 28.25MB 5.3s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 2.10MB / 51.10MB 5.3s
+#4 sha256:e727da478d47d626146e734dd426cad789beb1fe49c55a06a175621d30f31064 1.71MB / 1.71MB 5.2s done
+#4 sha256:c34f02d00fde0767e1607c15d336cb71414e607acb0b4e63680a37c007b76204 0B / 448B 5.3s
+#4 sha256:c34f02d00fde0767e1607c15d336cb71414e607acb0b4e63680a37c007b76204 448B / 448B 5.5s done
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 5.24MB / 51.10MB 8.8s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 2.10MB / 28.25MB 10.4s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 8.39MB / 51.10MB 12.4s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 4.19MB / 28.25MB 13.5s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 6.29MB / 28.25MB 17.0s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 10.49MB / 51.10MB 17.5s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 8.39MB / 28.25MB 20.1s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 13.63MB / 51.10MB 22.2s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 10.49MB / 28.25MB 23.7s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 15.73MB / 51.10MB 27.3s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 12.58MB / 28.25MB 27.7s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 18.87MB / 51.10MB 30.9s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 14.68MB / 28.25MB 31.6s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 16.78MB / 28.25MB 35.4s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 22.02MB / 51.10MB 36.0s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 18.87MB / 28.25MB 39.6s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 25.17MB / 51.10MB 41.1s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 20.97MB / 28.25MB 43.5s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 28.31MB / 51.10MB 46.0s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 23.07MB / 28.25MB 47.8s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 31.46MB / 51.10MB 51.2s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 25.17MB / 28.25MB 51.5s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 27.26MB / 28.25MB 55.5s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 33.55MB / 51.10MB 56.2s
+#4 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 28.25MB / 28.25MB 57.4s done
+#4 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 0.1s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 36.70MB / 51.10MB 59.0s
+#4 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 1.8s done
+#4 extracting sha256:22a7c5e442cd30f0c37eb73f2f6d91be1c6b63bd1c4278641b042fe77b260f33
+#4 extracting sha256:22a7c5e442cd30f0c37eb73f2f6d91be1c6b63bd1c4278641b042fe77b260f33 0.0s done
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 39.85MB / 51.10MB 61.7s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 42.99MB / 51.10MB 64.7s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 46.14MB / 51.10MB 67.8s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 49.28MB / 51.10MB 70.7s
+#4 sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 51.10MB / 51.10MB 72.2s done
+#4 extracting sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114
+#4 extracting sha256:5030a48eb5b08bea228f0db8440fed216cf91b5ca4d999bc2a692c2eb0a60114 2.2s done
+#4 extracting sha256:e727da478d47d626146e734dd426cad789beb1fe49c55a06a175621d30f31064 0.1s done
+#4 extracting sha256:c34f02d00fde0767e1607c15d336cb71414e607acb0b4e63680a37c007b76204 done
+#4 DONE 74.6s
+
+#6 [web base 2/3] RUN corepack enable && corepack prepare pnpm@11.28.12 --activate
+#6 0.275 Preparing pnpm@11.28.12 for immediate activation...
+#6 DONE 5.9s
+
+#7 [web base 3/3] WORKDIR /app
+#7 DONE 0.0s
+
+#8 [web runner 1/2] WORKDIR /app
+#8 DONE 0.0s
+
+#9 [web deps 1/3] COPY package.json pnpm-lock.yaml ./
+#9 DONE 0.0s
+
+#10 [web deps 2/3] COPY pnpm-workspace.yaml ./
+#10 DONE 0.0s
+
+#11 [web deps 3/3] RUN pnpm install --frozen-lockfile
+#11 1.080 ? Verifying lockfile against supply-chain policies (508 entries)...
+#11 1.145 Lockfile is up to date, resolution step is skipped
+#11 1.249 Progress: resolved 1, reused 0, downloaded 0, added 0
+#11 1.295 Packages: +435
+#11 1.295 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#11 2.250 Progress: resolved 435, reused 0, downloaded 0, added 0
+#11 2.471 Update available! 11.28.12 → 12.21.0.
+#11 2.471 Changelog: https://pnpm.io/v/12.21.0
+#11 2.471 To update, run: curl -fsSL https://get.pnpm.io/install.sh | sh -
+#11 2.669 Packages are hard linked from the content-addressable store to the virtual store.
+#11 2.669   Content-addressable store is at: /pnpm/store/v11
+#11 2.669   Virtual store is at:             node_modules/.pnpm
+#11 3.251 Progress: resolved 435, reused 0, downloaded 2, added 2
+#11 4.782 [WARN] Tarball download average speed 10 KiB/s (size 16 KiB) is below 50 KiB/s: https://registry.npmjs.org/events/-/events-3.3.0.tgz (GET)
+#11 4.883 Progress: resolved 435, reused 0, downloaded 5, added 5
+#11 6.593 [WARN] Tarball download average speed 15 KiB/s (size 43 KiB) is below 50 KiB/s: https://registry.npmjs.org/usehooks-ts/-/usehooks-ts-3.1.1.tgz (GET)
+#11 6.779 [WARN] Tarball download average speed 20 KiB/s (size 75 KiB) is below 50 KiB/s: https://registry.npmjs.org/@types/react/-/react-19.3.0.tgz (GET)
+#11 8.271 [WARN] Tarball download average speed 33 KiB/s (size 180 KiB) is below 50 KiB/s: https://registry.npmjs.org/tailwindcss/-/tailwindcss-4.3.3.tgz (GET)
+#11 9.935 [WARN] Tarball download average speed 7 KiB/s (size 49 KiB) is below 50 KiB/s: https://registry.npmjs.org/jose/-/jose-6.2.17.tgz (GET)
+#11 12.49 [WARN] Tarball download average speed 43 KiB/s (size 407 KiB) is below 50 KiB/s: https://registry.npmjs.org/@types/node/-/node-20.19.43.tgz (GET)
+#11 13.27 Progress: resolved 435, reused 0, downloaded 6, added 5
+#11 14.40 [WARN] Tarball download average speed 19 KiB/s (size 174 KiB) is below 50 KiB/s: https://registry.npmjs.org/@livekit/components-core/-/components-core-0.12.16.tgz (GET)
+#11 24.58 [WARN] GET https://registry.npmjs.org/@babel%2Fruntime error (UND_ERR_SOCKET). Will retry in 10 seconds. 2 retries left.
+#11 24.71 Progress: resolved 435, reused 0, downloaded 11, added 6
+#11 25.78 [WARN] GET https://registry.npmjs.org/@humanwhocodes%2Fmodule-importer error (ECONNRESET). Will retry in 10 seconds. 2 retries left.
+#11 26.45 Progress: resolved 435, reused 0, downloaded 17, added 10
+#11 27.20 [WARN] Request took 26018ms: https://registry.npmjs.org/@eslint%2Fconfig-helpers
+#11 27.22 [WARN] Request took 26019ms: https://registry.npmjs.org/@img%2Fsharp-linuxmusl-arm64
+#11 27.25 [WARN] Request took 26074ms: https://registry.npmjs.org/@emnapi%2Fruntime
+#11 27.27 [WARN] Request took 26090ms: https://registry.npmjs.org/@eslint%2Fobject-schema
+#11 27.53 Progress: resolved 435, reused 0, downloaded 33, added 17
+#11 27.55 [WARN] Request took 26369ms: https://registry.npmjs.org/@eslint%2Fconfig-array
+#11 27.82 [WARN] Request took 26636ms: https://registry.npmjs.org/@floating-ui%2Futils
+#11 27.84 [WARN] Request took 26645ms: https://registry.npmjs.org/@humanfs%2Fnode
+#11 28.30 [WARN] Request took 27124ms: https://registry.npmjs.org/@dimforge%2Frapier3d-compat
+#11 28.34 [WARN] Request took 27160ms: https://registry.npmjs.org/@eslint-community%2Feslint-utils
+#11 28.40 [WARN] Request took 27217ms: https://registry.npmjs.org/@eslint%2Fcore
+#11 28.41 [WARN] Request took 27227ms: https://registry.npmjs.org/@humanfs%2Fcore
+#11 28.84 Progress: resolved 435, reused 0, downloaded 41, added 29
+#11 29.19 [WARN] Tarball download average speed 4 KiB/s (size 7 KiB) is below 50 KiB/s: https://registry.npmjs.org/@livekit/mutex/-/mutex-1.1.1.tgz (GET)
+#11 29.29 [WARN] Request took 28102ms: https://registry.npmjs.org/@eslint%2Fplugin-kit
+#11 29.30 [WARN] Request took 27186ms: https://registry.npmjs.org/@jridgewell%2Fremapping
+#11 29.32 [WARN] Request took 27520ms: https://registry.npmjs.org/@isaacs%2Fnonrecursive-glob-match
+#11 29.50 [WARN] Request took 28327ms: https://registry.npmjs.org/@eslint-community%2Fregexpp
+#11 29.53 [WARN] Request took 27013ms: https://registry.npmjs.org/@livekit%2Fmutex
+#11 29.60 [WARN] Request took 27597ms: https://registry.npmjs.org/@jridgewell%2Fgen-mapping
+#11 29.61 [WARN] Request took 28421ms: https://registry.npmjs.org/@humanfs%2Ftypes
+#11 29.62 [WARN] Tarball download average speed 23 KiB/s (size 624 KiB) is below 50 KiB/s: https://registry.npmjs.org/eslint/-/eslint-9.39.5.tgz (GET)
+#11 29.67 [WARN] Request took 28013ms: https://registry.npmjs.org/@img%2Fsharp-win32-ia32
+#11 29.71 [WARN] Request took 27327ms: https://registry.npmjs.org/@jridgewell%2Ftrace-mapping
+#11 29.88 Progress: resolved 435, reused 0, downloaded 48, added 48
+#11 29.92 [WARN] Request took 28259ms: https://registry.npmjs.org/@img%2Fsharp-win32-x64
+#11 30.00 [WARN] Request took 28816ms: https://registry.npmjs.org/@eslint%2Fjs
+#11 30.05 [WARN] Request took 27525ms: https://registry.npmjs.org/@livekit%2Fprotocol
+#11 30.27 [WARN] Request took 29099ms: https://registry.npmjs.org/@bufbuild%2Fprotobuf
+#11 30.47 [WARN] Request took 29279ms: https://registry.npmjs.org/@eslint%2Feslintrc
+#11 30.52 [WARN] Request took 29334ms: https://registry.npmjs.org/@floating-ui%2Fcore
+#11 30.57 [WARN] Request took 29373ms: https://registry.npmjs.org/@img%2Fsharp-libvips-linux-riscv64
+#11 30.59 [WARN] Request took 28109ms: https://registry.npmjs.org/@livekit%2Fcomponents-core
+#11 30.62 [WARN] Request took 28129ms: https://registry.npmjs.org/@livekit%2Fcomponents-react
+#11 30.66 [WARN] Request took 29487ms: https://registry.npmjs.org/@babel%2Ftemplate
+#11 30.68 [WARN] Request took 29496ms: https://registry.npmjs.org/@floating-ui%2Fdom
+#11 30.73 [WARN] Request took 29554ms: https://registry.npmjs.org/@babel%2Ftypes
+#11 30.78 [WARN] Request took 29608ms: https://registry.npmjs.org/@babel%2Ftraverse
+#11 30.83 [WARN] Request took 28295ms: https://registry.npmjs.org/@mediapipe%2Ftasks-vision
+#11 30.89 Progress: resolved 435, reused 0, downloaded 50, added 50
+#11 30.95 [WARN] Tarball download average speed 6 KiB/s (size 13 KiB) is below 50 KiB/s: https://registry.npmjs.org/sdp-transform/-/sdp-transform-2.15.0.tgz (GET)
+#11 31.01 [WARN] Tarball download average speed 47 KiB/s (size 168 KiB) is below 50 KiB/s: https://registry.npmjs.org/fflate/-/fflate-0.8.3.tgz (GET)
+#11 31.50 [WARN] Request took 30304ms: https://registry.npmjs.org/@img%2Fsharp-libvips-linux-s390x
+#11 31.79 [WARN] Request took 30590ms: https://registry.npmjs.org/@img%2Fsharp-libvips-linux-arm
+#11 31.80 [WARN] Request took 30609ms: https://registry.npmjs.org/@img%2Fsharp-freebsd-wasm32
+#11 31.86 [WARN] Request took 30666ms: https://registry.npmjs.org/@img%2Fsharp-libvips-darwin-arm64
+#11 31.89 Progress: resolved 435, reused 0, downloaded 58, added 58
+#11 32.10 [WARN] Tarball download average speed 8 KiB/s (size 28 KiB) is below 50 KiB/s: https://registry.npmjs.org/@tweenjs/tween.js/-/tween.js-23.1.3.tgz (GET)
+#11 32.12 [WARN] Request took 30927ms: https://registry.npmjs.org/@img%2Fsharp-darwin-x64
+#11 32.42 [WARN] Tarball download average speed 8 KiB/s (size 20 KiB) is below 50 KiB/s: https://registry.npmjs.org/undici-types/-/undici-types-6.21.0.tgz (GET)
+#11 32.54 [WARN] Request took 31353ms: https://registry.npmjs.org/@img%2Fsharp-darwin-arm64
+#11 32.58 [WARN] Tarball download average speed 32 KiB/s (size 40 KiB) is below 50 KiB/s: https://registry.npmjs.org/@tailwindcss/node/-/node-4.3.3.tgz (GET)
+#11 32.90 Progress: resolved 435, reused 0, downloaded 72, added 71
+#11 32.90 [WARN] Request took 31715ms: https://registry.npmjs.org/@img%2Fcolour
+#11 33.21 [WARN] Tarball download average speed 29 KiB/s (size 73 KiB) is below 50 KiB/s: https://registry.npmjs.org/@eslint/config-array/-/config-array-0.21.2.tgz (GET)
+#11 33.28 [WARN] Request took 32082ms: https://registry.npmjs.org/@img%2Fsharp-libvips-linux-ppc64
+#11 33.52 [WARN] Tarball download average speed 25 KiB/s (size 78 KiB) is below 50 KiB/s: https://registry.npmjs.org/@eslint-community/eslint-utils/-/eslint-utils-4.10.1.tgz (GET)
+#11 33.84 [WARN] Tarball download average speed 14 KiB/s (size 21 KiB) is below 50 KiB/s: https://registry.npmjs.org/@eslint/plugin-kit/-/plugin-kit-0.4.1.tgz (GET)
+#11 33.90 Progress: resolved 435, reused 0, downloaded 85, added 85
+#11 34.08 [WARN] Request took 32895ms: https://registry.npmjs.org/@humanwhocodes%2Fretry
+#11 34.37 [WARN] Tarball download average speed 35 KiB/s (size 135 KiB) is below 50 KiB/s: https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz (GET)
+#11 34.48 [WARN] Tarball download average speed 25 KiB/s (size 118 KiB) is below 50 KiB/s: https://registry.npmjs.org/machina/-/machina-7.0.1.tgz (GET)
+#11 34.51 [WARN] Tarball download average speed 9 KiB/s (size 11 KiB) is below 50 KiB/s: https://registry.npmjs.org/@humanwhocodes/retry/-/retry-0.4.3.tgz (GET)
+#11 34.69 [WARN] Request took 32002ms: https://registry.npmjs.org/@monogrid%2Fgainmap-js
+#11 34.90 Progress: resolved 435, reused 0, downloaded 93, added 93
+#11 35.45 [WARN] Tarball download average speed 2 KiB/s (size 6 KiB) is below 50 KiB/s: https://registry.npmjs.org/@humanwhocodes/module-importer/-/module-importer-1.0.1.tgz (GET)
+#11 35.63 [WARN] Tarball download average speed 4 KiB/s (size 12 KiB) is below 50 KiB/s: https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz (GET)
+#11 35.91 Progress: resolved 435, reused 0, downloaded 96, added 96
+#11 36.00 [WARN] Tarball download average speed 47 KiB/s (size 162 KiB) is below 50 KiB/s: https://registry.npmjs.org/esquery/-/esquery-1.7.0.tgz (GET)
+#11 36.29 [WARN] Tarball download average speed 26 KiB/s (size 272 KiB) is below 50 KiB/s: https://registry.npmjs.org/three-mesh-bvh/-/three-mesh-bvh-0.8.3.tgz (GET)
+#11 36.90 Progress: resolved 435, reused 0, downloaded 98, added 98
+#11 36.91 [WARN] Tarball download average speed 27 KiB/s (size 132 KiB) is below 50 KiB/s: https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-3.3.7.tgz (GET)
+#11 37.99 Progress: resolved 435, reused 0, downloaded 99, added 99
+#11 79.80 [WARN] Tarball download average speed 0 KiB/s (size 13 KiB) is below 50 KiB/s: https://registry.npmjs.org/optionator/-/optionator-0.9.4.tgz (GET)
+#11 80.31 [WARN] Tarball download average speed 6 KiB/s (size 353 KiB) is below 50 KiB/s: https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001826.tgz (GET)
+#11 80.95 [WARN] Tarball download average speed 1 KiB/s (size 71 KiB) is below 50 KiB/s: https://registry.npmjs.org/jose/-/jose-5.10.0.tgz (GET)
+#11 81.35 [WARN] Request took 50807ms: https://registry.npmjs.org/@types%2Fdraco3d
+#11 81.75 Progress: resolved 435, reused 0, downloaded 100, added 99
+#11 83.12 [WARN] Tarball download average speed 41 KiB/s (size 2293 KiB) is below 50 KiB/s: https://registry.npmjs.org/@dimforge/rapier3d-compat/-/rapier3d-compat-0.12.0.tgz (GET)
+#11 86.51 [WARN] Tarball download average speed 2 KiB/s (size 130 KiB) is below 50 KiB/s: https://registry.npmjs.org/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-6.10.2.tgz (GET)
+#11 90.96 [WARN] Tarball download average speed 2 KiB/s (size 144 KiB) is below 50 KiB/s: https://registry.npmjs.org/livekit-server-sdk/-/livekit-server-sdk-2.19.3.tgz (GET)
+#11 91.34 Progress: resolved 435, reused 0, downloaded 101, added 99
+#11 91.66 [WARN] Request took 60950ms: https://registry.npmjs.org/@types%2Fjson5
+#11 94.44 [WARN] Tarball download average speed 6 KiB/s (size 417 KiB) is below 50 KiB/s: https://registry.npmjs.org/jiti/-/jiti-2.7.0.tgz (GET)
+#11 94.49 [WARN] Tarball download average speed 6 KiB/s (size 401 KiB) is below 50 KiB/s: https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.32.0.tgz (GET)
+#11 95.60 Progress: resolved 435, reused 0, downloaded 107, added 101
+#11 95.83 [WARN] Request took 65248ms: https://registry.npmjs.org/@types%2Fjson-schema
+#11 99.42 Progress: resolved 435, reused 0, downloaded 113, added 105
+#11 105.2 Progress: resolved 435, reused 0, downloaded 116, added 112
+#11 105.5 [WARN] Request took 104267ms: https://registry.npmjs.org/@img%2Fsharp-libvips-linux-arm64
+#11 105.7 [WARN] Request took 74701ms: https://registry.npmjs.org/@types%2Foffscreencanvas
+#11 108.0 [WARN] Tarball download average speed 28 KiB/s (size 123 KiB) is below 50 KiB/s: https://registry.npmjs.org/fflate/-/fflate-0.6.11.tgz (GET)
+#11 108.8 Progress: resolved 435, reused 0, downloaded 120, added 116
+#11 109.0 [WARN] Request took 78613ms: https://registry.npmjs.org/@types%2Fdom-mediacapture-record
+#11 109.0 [WARN] Request took 106765ms: https://registry.npmjs.org/@jridgewell%2Fsourcemap-codec
+#11 109.2 [WARN] Request took 79008ms: https://registry.npmjs.org/@tweenjs%2Ftween.js
+#11 109.3 [WARN] Request took 77166ms: https://registry.npmjs.org/@types%2Fstats.js
+#11 112.9 Progress: resolved 435, reused 0, downloaded 124, added 120
+#11 113.7 [WARN] Request took 81906ms: https://registry.npmjs.org/@types%2Freact-reconciler
+#11 116.0 [WARN] Tarball download average speed 43 KiB/s (size 585 KiB) is below 50 KiB/s: https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-7.1.1.tgz (GET)
+#11 116.7 Progress: resolved 435, reused 0, downloaded 128, added 123
+#11 119.9 Progress: resolved 435, reused 0, downloaded 135, added 124
+#11 120.0 [WARN] Request took 118855ms: https://registry.npmjs.org/@img%2Fsharp-libvips-darwin-x64
+#11 123.3 Progress: resolved 435, reused 0, downloaded 139, added 128
+#11 123.7 [WARN] Request took 121470ms: https://registry.npmjs.org/@jridgewell%2Fresolve-uri
+#11 124.2 [WARN] Request took 91270ms: https://registry.npmjs.org/@types%2Fwebxr
+#11 126.0 [WARN] Tarball download average speed 28 KiB/s (size 182 KiB) is below 50 KiB/s: https://registry.npmjs.org/@img/sharp-linux-x64/-/sharp-linux-x64-0.35.5.tgz (GET)
+#11 126.4 Progress: resolved 435, reused 0, downloaded 142, added 132
+#11 126.6 [WARN] Request took 94758ms: https://registry.npmjs.org/@types%2Fsdp-transform
+#11 128.3 Progress: resolved 435, reused 0, downloaded 147, added 135
+#11 130.1 Progress: resolved 435, reused 0, downloaded 150, added 139
+#11 130.3 [WARN] Request took 94733ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-android-arm-eabi
+#11 132.6 Progress: resolved 435, reused 0, downloaded 152, added 143
+#11 133.1 [WARN] Request took 131890ms: https://registry.npmjs.org/@humanwhocodes%2Fmodule-importer
+#11 135.9 Progress: resolved 435, reused 0, downloaded 155, added 147
+#11 136.2 [WARN] Request took 98651ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-android-arm64
+#11 138.9 Progress: resolved 435, reused 0, downloaded 159, added 151
+#11 141.5 [WARN] Tarball download average speed 22 KiB/s (size 128 KiB) is below 50 KiB/s: https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz (GET)
+#11 142.1 Progress: resolved 435, reused 0, downloaded 161, added 156
+#11 146.1 Progress: resolved 435, reused 0, downloaded 165, added 159
+#11 146.5 [WARN] Request took 55013ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-darwin-arm64
+#11 148.1 Progress: resolved 435, reused 0, downloaded 170, added 162
+#11 148.4 [WARN] Request took 52386ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-darwin-x64
+#11 150.2 Progress: resolved 435, reused 0, downloaded 174, added 166
+#11 150.4 [WARN] Request took 118896ms: https://registry.npmjs.org/@types%2Freact-dom
+#11 152.2 Progress: resolved 435, reused 0, downloaded 178, added 170
+#11 152.5 [WARN] Request took 52846ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-freebsd-x64
+#11 154.2 Progress: resolved 435, reused 0, downloaded 182, added 174
+#11 154.5 [WARN] Request took 53856ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-arm-gnueabihf
+#11 154.6 [WARN] Request took 53795ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-arm-musleabihf
+#11 154.7 [WARN] Request took 49292ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-arm64-gnu
+#11 156.6 Progress: resolved 435, reused 0, downloaded 184, added 180
+#11 157.0 [WARN] Request took 47787ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-arm64-musl
+#11 157.1 [WARN] Request took 47808ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-loong64-gnu
+#11 158.7 Progress: resolved 435, reused 0, downloaded 189, added 183
+#11 159.0 [WARN] Request took 45968ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-loong64-musl
+#11 160.5 Progress: resolved 435, reused 0, downloaded 194, added 187
+#11 161.0 [WARN] Request took 47394ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-riscv64-gnu
+#11 161.1 [WARN] Request took 47680ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-ppc64-gnu
+#11 161.1 [WARN] Request took 47335ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-riscv64-musl
+#11 162.6 Progress: resolved 435, reused 0, downloaded 197, added 193
+#11 163.1 [WARN] Request took 46160ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-s390x-gnu
+#11 164.5 Progress: resolved 435, reused 0, downloaded 202, added 197
+#11 164.8 [WARN] Request took 132241ms: https://registry.npmjs.org/@types%2Fthree
+#11 166.9 Progress: resolved 435, reused 0, downloaded 205, added 202
+#11 167.1 [WARN] Request took 43625ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-x64-gnu
+#11 167.2 [WARN] Request took 43592ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-linux-x64-musl
+#11 167.2 [WARN] Request took 40632ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-openharmony-arm64
+#11 168.7 Progress: resolved 435, reused 0, downloaded 207, added 205
+#11 169.0 [WARN] Request took 42206ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-win32-arm64-msvc
+#11 170.5 Progress: resolved 435, reused 0, downloaded 212, added 208
+#11 171.9 Progress: resolved 435, reused 0, downloaded 214, added 212
+#11 172.3 [WARN] Request took 171096ms: https://registry.npmjs.org/@babel%2Fruntime
+#11 172.6 [WARN] Request took 39707ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-win32-x64-msvc
+#11 174.5 Progress: resolved 435, reused 0, downloaded 218, added 214
+#11 174.9 [WARN] Request took 46483ms: https://registry.npmjs.org/@unrs%2Fresolver-binding-win32-ia32-msvc
+#11 175.2 [WARN] Request took 26834ms: https://registry.npmjs.org/acorn-jsx
+#11 175.2 [WARN] Request took 39012ms: https://registry.npmjs.org/@use-gesture%2Fcore
+#11 175.2 [WARN] Request took 146347ms: https://registry.npmjs.org/@tailwindcss%2Fnode
+#11 175.3 [WARN] Request took 36147ms: https://registry.npmjs.org/@use-gesture%2Freact
+#11 175.3 [WARN] Request took 146432ms: https://registry.npmjs.org/@react-three%2Ffiber
+#11 175.3 [WARN] Request took 145387ms: https://registry.npmjs.org/@tailwindcss%2Foxide-wasm32-wasi
+#11 175.3 [WARN] Request took 42194ms: https://registry.npmjs.org/@tailwindcss%2Fturbopack
+#11 175.4 [WARN] Request took 24772ms: https://registry.npmjs.org/acorn
+#11 175.4 [WARN] Request took 145904ms: https://registry.npmjs.org/@tailwindcss%2Foxide-android-arm64
+#11 175.5 [WARN] Request took 145869ms: https://registry.npmjs.org/@tailwindcss%2Foxide-linux-arm64-gnu
+#11 175.5 Progress: resolved 435, reused 0, downloaded 235, added 235
+#11 175.5 [WARN] Request took 145577ms: https://registry.npmjs.org/@tailwindcss%2Foxide-win32-arm64-msvc
+#11 175.6 [WARN] Request took 141488ms: https://registry.npmjs.org/@typescript-eslint%2Ftsconfig-utils
+#11 175.6 [WARN] Request took 141728ms: https://registry.npmjs.org/@typescript-eslint%2Fproject-service
+#11 175.7 [WARN] Request took 145701ms: https://registry.npmjs.org/@tailwindcss%2Foxide-win32-x64-msvc
+#11 175.7 [WARN] Request took 146204ms: https://registry.npmjs.org/@tailwindcss%2Foxide-darwin-x64
+#11 175.8 [WARN] Request took 146216ms: https://registry.npmjs.org/@tailwindcss%2Foxide-freebsd-x64
+#11 175.8 [WARN] Request took 146089ms: https://registry.npmjs.org/@tailwindcss%2Foxide-linux-x64-gnu
+#11 175.8 [WARN] Request took 146196ms: https://registry.npmjs.org/@tailwindcss%2Foxide-linux-arm64-musl
+#11 175.9 [WARN] Request took 146272ms: https://registry.npmjs.org/@tailwindcss%2Foxide-linux-arm-gnueabihf
+#11 175.9 [WARN] Request took 144065ms: https://registry.npmjs.org/@types%2Freact
+#11 175.9 [WARN] Request took 84151ms: https://registry.npmjs.org/@mediapipe%2Ftasks-vision
+#11 175.9 [WARN] Request took 146162ms: https://registry.npmjs.org/@tailwindcss%2Foxide-linux-x64-musl
+#11 176.0 [WARN] Request took 146435ms: https://registry.npmjs.org/@tailwindcss%2Foxide-darwin-arm64
+#11 176.0 [WARN] Request took 173251ms: https://registry.npmjs.org/@next%2Fswc-darwin-x64
+#11 176.1 [WARN] Request took 172410ms: https://registry.npmjs.org/@next%2Fswc-linux-x64-gnu
+#11 176.1 [WARN] Request took 173354ms: https://registry.npmjs.org/@next%2Fswc-linux-arm64-gnu
+#11 176.2 [WARN] Request took 148657ms: https://registry.npmjs.org/@next%2Fswc-linux-x64-musl
+#11 176.2 [WARN] Request took 17282ms: https://registry.npmjs.org/array-includes
+#11 176.2 [WARN] Request took 173473ms: https://registry.npmjs.org/@next%2Fswc-darwin-arm64
+#11 176.3 [WARN] Request took 173513ms: https://registry.npmjs.org/@next%2Feslint-plugin-next
+#11 176.3 [WARN] Request took 19355ms: https://registry.npmjs.org/array-buffer-byte-length
+#11 176.5 Progress: resolved 435, reused 0, downloaded 241, added 241
+#11 176.7 [WARN] Request took 15554ms: https://registry.npmjs.org/array.prototype.findlastindex
+#11 176.8 [WARN] Request took 19850ms: https://registry.npmjs.org/aria-query
+#11 176.8 [WARN] Request took 13803ms: https://registry.npmjs.org/array.prototype.flat
+#11 176.8 [WARN] Request took 13786ms: https://registry.npmjs.org/array.prototype.tosorted
+#11 177.2 [WARN] Request took 11932ms: https://registry.npmjs.org/arraybuffer.prototype.slice
+#11 177.5 [WARN] Tarball download average speed 23 KiB/s (size 37 KiB) is below 50 KiB/s: https://registry.npmjs.org/@babel/helper-module-transforms/-/helper-module-transforms-7.29.14.tgz (GET)
+#11 177.5 Progress: resolved 435, reused 0, downloaded 245, added 245
+#11 177.6 [WARN] Request took 174802ms: https://registry.npmjs.org/@next%2Fswc-linux-arm64-musl
+#11 177.6 [WARN] Request took 150091ms: https://registry.npmjs.org/@next%2Fswc-win32-arm64-msvc
+#11 177.7 [WARN] Tarball download average speed 10 KiB/s (size 17 KiB) is below 50 KiB/s: https://registry.npmjs.org/@babel/template/-/template-7.29.7.tgz (GET)
+#11 177.7 [WARN] Tarball download average speed 20 KiB/s (size 43 KiB) is below 50 KiB/s: https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.72.2.tgz (GET)
+#11 177.8 [WARN] Request took 10782ms: https://registry.npmjs.org/ast-types-flow
+#11 178.5 Progress: resolved 435, reused 0, downloaded 261, added 261
+#11 178.7 [WARN] Tarball download average speed 18 KiB/s (size 49 KiB) is below 50 KiB/s: https://registry.npmjs.org/json5/-/json5-2.2.3.tgz (GET)
+#11 179.1 [WARN] Tarball download average speed 16 KiB/s (size 44 KiB) is below 50 KiB/s: https://registry.npmjs.org/@floating-ui/core/-/core-1.8.0.tgz (GET)
+#11 179.4 [WARN] Request took 22483ms: https://registry.npmjs.org/argparse
+#11 179.6 [WARN] Request took 144880ms: https://registry.npmjs.org/@typescript-eslint%2Ftypes
+#11 179.6 Progress: resolved 435, reused 0, downloaded 275, added 275
+#11 179.6 [WARN] Tarball download average speed 2 KiB/s (size 7 KiB) is below 50 KiB/s: https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz (GET)
+#11 180.0 [WARN] Tarball download average speed 44 KiB/s (size 164 KiB) is below 50 KiB/s: https://registry.npmjs.org/@babel/traverse/-/traverse-7.29.14.tgz (GET)
+#11 180.0 [WARN] Request took 151195ms: https://registry.npmjs.org/@react-three%2Fdrei
+#11 180.2 [WARN] Tarball download average speed 8 KiB/s (size 30 KiB) is below 50 KiB/s: https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz (GET)
+#11 180.6 Progress: resolved 435, reused 0, downloaded 285, added 285
+#11 180.6 [WARN] Tarball download average speed 29 KiB/s (size 113 KiB) is below 50 KiB/s: https://registry.npmjs.org/@babel/generator/-/generator-7.29.14.tgz (GET)
+#11 180.8 [WARN] Request took 150072ms: https://registry.npmjs.org/@types%2Fnode
+#11 180.9 [WARN] Request took 21926ms: https://registry.npmjs.org/array.prototype.findlast
+#11 181.2 [WARN] Tarball download average speed 35 KiB/s (size 184 KiB) is below 50 KiB/s: https://registry.npmjs.org/@babel/helpers/-/helpers-7.29.14.tgz (GET)
+#11 181.6 Progress: resolved 435, reused 0, downloaded 293, added 293
+#11 182.3 [WARN] Tarball download average speed 3 KiB/s (size 17 KiB) is below 50 KiB/s: https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz (GET)
+#11 182.6 Progress: resolved 435, reused 0, downloaded 307, added 307
+#11 182.8 [WARN] Request took 28235ms: https://registry.npmjs.org/ansi-styles
+#11 182.9 [WARN] Request took 30399ms: https://registry.npmjs.org/ajv
+#11 183.3 [WARN] Tarball download average speed 35 KiB/s (size 41 KiB) is below 50 KiB/s: https://registry.npmjs.org/hermes-estree/-/hermes-estree-0.25.1.tgz (GET)
+#11 183.3 [WARN] Tarball download average speed 12 KiB/s (size 19 KiB) is below 50 KiB/s: https://registry.npmjs.org/object.assign/-/object.assign-4.1.7.tgz (GET)
+#11 183.6 Progress: resolved 435, reused 0, downloaded 325, added 325
+#11 184.4 [WARN] Tarball download average speed 14 KiB/s (size 19 KiB) is below 50 KiB/s: https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.72.2.tgz (GET)
+#11 184.6 Progress: resolved 435, reused 0, downloaded 332, added 332
+#11 184.9 [WARN] Tarball download average speed 7 KiB/s (size 77 KiB) is below 50 KiB/s: https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.72.2.tgz (GET)
+#11 185.0 [WARN] Tarball download average speed 42 KiB/s (size 230 KiB) is below 50 KiB/s: https://registry.npmjs.org/es-abstract/-/es-abstract-1.24.2.tgz (GET)
+#11 185.1 [WARN] Tarball download average speed 20 KiB/s (size 41 KiB) is below 50 KiB/s: https://registry.npmjs.org/ignore/-/ignore-7.0.14.tgz (GET)
+#11 185.6 Progress: resolved 435, reused 0, downloaded 342, added 342
+#11 185.7 [WARN] Tarball download average speed 17 KiB/s (size 49 KiB) is below 50 KiB/s: https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.5.0.tgz (GET)
+#11 186.5 [WARN] Request took 183759ms: https://registry.npmjs.org/@next%2Fenv
+#11 186.6 Progress: resolved 435, reused 0, downloaded 351, added 351
+#11 187.1 [WARN] Request took 157136ms: https://registry.npmjs.org/@tailwindcss%2Foxide
+#11 187.2 [WARN] Request took 11340ms: https://registry.npmjs.org/browserslist
+#11 187.3 [WARN] Tarball download average speed 35 KiB/s (size 194 KiB) is below 50 KiB/s: https://registry.npmjs.org/language-subtag-registry/-/language-subtag-registry-0.3.23.tgz (GET)
+#11 187.6 Progress: resolved 435, reused 0, downloaded 374, added 374
+#11 187.6 [WARN] Tarball download average speed 9 KiB/s (size 22 KiB) is below 50 KiB/s: https://registry.npmjs.org/picomatch/-/picomatch-2.3.2.tgz (GET)
+#11 188.3 [WARN] Tarball download average speed 26 KiB/s (size 345 KiB) is below 50 KiB/s: https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.72.2.tgz (GET)
+#11 188.6 [WARN] Request took 154439ms: https://registry.npmjs.org/@typescript-eslint%2Ftype-utils
+#11 188.6 Progress: resolved 435, reused 0, downloaded 385, added 385
+#11 189.6 Progress: resolved 435, reused 0, downloaded 399, added 399
+#11 190.6 Progress: resolved 435, reused 0, downloaded 422, added 422
+#11 191.0 [WARN] Request took 11045ms: https://registry.npmjs.org/csstype
+#11 191.3 [WARN] Request took 163711ms: https://registry.npmjs.org/@next%2Fswc-win32-x64-msvc
+#11 191.4 [WARN] Request took 157320ms: https://registry.npmjs.org/@typescript-eslint%2Fscope-manager
+#11 191.5 [WARN] Request took 22459ms: https://registry.npmjs.org/axe-core
+#11 191.6 Progress: resolved 435, reused 0, downloaded 428, added 428
+#11 193.0 Progress: resolved 435, reused 0, downloaded 429, added 428
+#11 194.0 Progress: resolved 435, reused 0, downloaded 429, added 429
+#11 196.2 [WARN] Request took 160918ms: https://registry.npmjs.org/@typescript-eslint%2Fvisitor-keys
+#11 197.5 [WARN] Request took 16681ms: https://registry.npmjs.org/enhanced-resolve
+#11 198.1 [WARN] Request took 15957ms: https://registry.npmjs.org/eslint-plugin-react-hooks
+#11 199.0 [WARN] Request took 35926ms: https://registry.npmjs.org/array.prototype.flatmap
+#11 199.6 [WARN] Tarball download average speed 32 KiB/s (size 297 KiB) is below 50 KiB/s: https://registry.npmjs.org/draco3d/-/draco3d-1.5.9.tgz (GET)
+#11 199.6 Progress: resolved 435, reused 0, downloaded 430, added 429
+#11 200.6 Progress: resolved 435, reused 0, downloaded 430, added 430
+#11 201.8 [WARN] Tarball download average speed 40 KiB/s (size 1115 KiB) is below 50 KiB/s: https://registry.npmjs.org/zod/-/zod-4.6.7.tgz (GET)
+#11 201.8 Progress: resolved 435, reused 0, downloaded 431, added 430
+#11 202.8 Progress: resolved 435, reused 0, downloaded 431, added 431
+#11 206.4 [WARN] Request took 171419ms: https://registry.npmjs.org/@typescript-eslint%2Ftypescript-estree
+#11 207.2 [WARN] Request took 15329ms: https://registry.npmjs.org/lucide-react
+#11 207.7 [WARN] Request took 174429ms: https://registry.npmjs.org/@typescript-eslint%2Feslint-plugin
+#11 208.6 [WARN] Tarball download average speed 41 KiB/s (size 1376 KiB) is below 50 KiB/s: https://registry.npmjs.org/react-dom/-/react-dom-19.3.0.tgz (GET)
+#11 208.6 Progress: resolved 435, reused 0, downloaded 432, added 431
+#11 209.6 Progress: resolved 435, reused 0, downloaded 432, added 432
+#11 210.0 [WARN] Request took 13717ms: https://registry.npmjs.org/use-sync-external-store
+#11 211.3 [WARN] Request took 15957ms: https://registry.npmjs.org/tailwindcss
+#11 211.5 [WARN] Request took 17813ms: https://registry.npmjs.org/react
+#11 212.2 [WARN] Request took 177186ms: https://registry.npmjs.org/@typescript-eslint%2Futils
+#11 213.6 [WARN] Request took 20161ms: https://registry.npmjs.org/react-dom
+#11 214.5 [WARN] Request took 20325ms: https://registry.npmjs.org/scheduler
+#11 214.5 [WARN] Request took 37681ms: https://registry.npmjs.org/caniuse-lite
+#11 214.8 [WARN] Request took 34075ms: https://registry.npmjs.org/electron-to-chromium
+#11 215.3 [WARN] Request took 181634ms: https://registry.npmjs.org/@typescript-eslint%2Fparser
+#11 215.6 Progress: resolved 435, reused 0, downloaded 433, added 432
+#11 216.6 Progress: resolved 435, reused 0, downloaded 433, added 433
+#11 216.7 [WARN] Request took 23169ms: https://registry.npmjs.org/react-is
+#11 216.9 [WARN] Request took 20856ms: https://registry.npmjs.org/typescript
+#11 225.0 [WARN] Request took 32595ms: https://registry.npmjs.org/next
+#11 226.4 [WARN] Request took 38049ms: https://registry.npmjs.org/hls.js
+#11 226.6 Progress: resolved 435, reused 0, downloaded 434, added 433
+#11 227.6 Progress: resolved 435, reused 0, downloaded 434, added 434
+#11 232.9 [WARN] Request took 51216ms: https://registry.npmjs.org/eslint-config-next
+#11 232.9 ✓ Lockfile passes supply-chain policies (508 entries in 3m 51.8s)
+#11 260.1 Progress: resolved 435, reused 0, downloaded 435, added 434
+#11 260.2 Progress: resolved 435, reused 0, downloaded 435, added 435, done
+#11 260.5 
+#11 260.5 dependencies:
+#11 260.5 + @livekit/components-react 2.9.25
+#11 260.5 + @react-three/drei 10.7.9
+#11 260.5 + @react-three/fiber 9.8.2
+#11 260.5 + @types/three 0.187.0
+#11 260.5 + livekit-client 2.24.1
+#11 260.5 + livekit-server-sdk 2.19.3
+#11 260.5 + lucide-react 1.74.0
+#11 260.5 + next 16.4.6
+#11 260.5 + react 19.3.0
+#11 260.5 + react-dom 19.3.0
+#11 260.5 + three 0.187.0
+#11 260.5 + zustand 5.1.0
+#11 260.5 
+#11 260.5 devDependencies:
+#11 260.5 + @tailwindcss/turbopack 4.3.3
+#11 260.5 + @types/node 20.19.43
+#11 260.5 + @types/react 19.3.0
+#11 260.5 + @types/react-dom 19.3.0
+#11 260.5 + eslint 9.39.5
+#11 260.5 + eslint-config-next 16.4.6
+#11 260.5 + tailwindcss 4.3.3
+#11 260.5 + typescript 5.9.3
+#11 260.5 
+#11 260.5 Done in 4m 20.3s using pnpm v11.28.12
+#11 DONE 260.8s
+
+#12 [web builder 1/2] COPY . .
+#12 DONE 0.1s
+
+#13 [web builder 2/2] RUN pnpm build
+#13 0.570 $ next build
+#13 0.902 ▲ Next.js 16.4.6 (Turbopack)
+#13 0.930 ✓ Running next.config.ts took 27ms
+#13 0.935 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#13 0.935 This information is used to shape Next.js' roadmap and prioritize features.
+#13 0.935 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#13 0.935 https://nextjs.org/telemetry
+#13 0.935 
+#13 0.953 
+#13 0.972   Creating an optimized production build ...
+#13 4.759 ✓ Compiled successfully in 3.8s
+#13 4.770   Running TypeScript ...
+#13 7.864   Finished TypeScript in 3.1s ...
+#13 7.866   Collecting page data using 6 workers ...
+#13 7.980 ⚠ The Edge Runtime is deprecated. You can use the "nodejs" runtime instead. Learn more: https://nextjs.org/docs/messages/edge-runtime-deprecated
+#13 8.311 ⚠ Using edge runtime on a page currently disables static generation for that page
+#13 8.348   Generating static pages using 6 workers (0/4) ...
+#13 8.664   Generating static pages using 6 workers (1/4) 
+#13 8.691   Generating static pages using 6 workers (2/4) 
+#13 8.693   Generating static pages using 6 workers (3/4) 
+#13 8.695 ✓ Generating static pages using 6 workers (4/4) in 346ms
+#13 8.698   Finalizing page optimization ...
+#13 8.706 
+#13 8.707 Route (app)
+#13 8.707 ┌ ○ /
+#13 8.707 ├ ○ /_not-found
+#13 8.707 └ ƒ /api/livekit/token
+#13 8.707 
+#13 8.707 
+#13 8.707 ○  (Static)   prerendered as static content
+#13 8.707 ƒ  (Dynamic)  server-rendered on demand
+#13 8.707 
+#13 DONE 9.3s
+
+#14 [web runner 2/2] COPY --from=builder /app ./
+#14 DONE 2.7s
+
+#15 [web] exporting to image
+#15 exporting layers
+#15 exporting layers 3.0s done
+#15 writing image sha256:c759bfcce177a61a65fef6639e915558bba632a4fc289e7e9217f57eddae616a done
+#15 naming to docker.io/library/shorbornobd-nativebox-web done
+#15 DONE 3.0s
+DOCKER_BUILD=PASS
+
+=== FINAL STATUS ===
+SOURCE=/srv/mcore/apps/web
+TARGET=/srv/mcore/shorbornoBD-NativeBox/apps/web
+EVIDENCE=/srv/mcore/shorbornoBD-NativeBox/evidence/web-integration/20261120T202237Z
+DOCKER_BUILD_EXIT=0
+GIT_STATUS=/srv/mcore/shorbornoBD-NativeBox/evidence/web-integration/20261120T202237Z/GIT-STATUS.txt
+No containers started.
+No deployment, DNS, Tunnel, payment or Git push performed.
+Orchestrator and Sandbox were not fabricated.
+[SUCCESS] NativeBox Web Docker image build completed.

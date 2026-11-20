@@ -1,0 +1,492 @@
+
+=================================================================
+FILE: README.md
+=================================================================
+0001: # NativeBox-ais001 — MCore One-Command Delivery
+0002: 
+0003: This repository is being initialized under **MCORE-ONECMD-DELIVERY-001**.
+0004: 
+0005: ## Current state
+0006: 
+0007: - Initial repository bootstrap only.
+0008: - Application source and the reported `mcore-architecture.zip` have not yet been inspected or imported.
+0009: - No deployment has been performed.
+0010: - No Cloudflare resources, DNS records, KVM services, or paid resources have been provisioned or changed.
+0011: 
+0012: ## Governance
+0013: 
+0014: AIS retains final authority for production deployment and acceptance. Architecture approval is not implementation verification or production acceptance.
+0015: 
+0016: ## Intended delivery target
+0017: 
+0018: - Source of truth: GitHub
+0019: - Runtime: Debian 13 / KVM
+0020: - Edge: Cloudflare Tunnel for `ais.shorborno.ai`
+0021: - Application target: Next.js, FastAPI sandbox, Playwright orchestrator, PostgreSQL and Qdrant, subject to source inspection and compatibility verification.
+0022: 
+0023: ## Next steps
+0024: 
+0025: 1. Inspect and safely import the existing ZIP.
+0026: 2. Audit required files and detect missing components.
+0027: 3. Validate Docker Compose without starting services.
+0028: 4. Add CI and security checks.
+0029: 5. Build and test locally.
+0030: 6. Deploy only after separate explicit AIS approval.
+
+=================================================================
+FILE: Makefile
+=================================================================
+0001: .PHONY: audit compose-validate preflight
+0002: 
+0003: audit:
+0004: 	bash scripts/audit-repo.sh
+0005: 
+0006: compose-validate:
+0007: 	bash scripts/validate-compose.sh .env.example
+0008: 
+0009: preflight:
+0010: 	bash scripts/deploy.sh --preflight
+
+=================================================================
+FILE: docker-compose.yml
+=================================================================
+0001: # PROVISIONAL SKELETON. App build contexts must be supplied by ZIP audit.
+0002: services:
+0003:   web:
+0004:     build:
+0005:       context: ./apps/web
+0006:     environment:
+0007:       APP_ENV: ${APP_ENV:-staging}
+0008:     expose: ["3000"]
+0009:     networks: [edge, app_internal]
+0010:     restart: unless-stopped
+0011: 
+0012:   sandbox:
+0013:     build:
+0014:       context: ./apps/sandbox
+0015:     expose: ["8000"]
+0016:     networks: [app_internal]
+0017:     restart: unless-stopped
+0018: 
+0019:   orchestrator:
+0020:     build:
+0021:       context: ./services/orchestrator
+0022:     networks: [app_internal]
+0023:     restart: unless-stopped
+0024: 
+0025:   postgres:
+0026:     image: postgres:16-alpine
+0027:     environment:
+0028:       POSTGRES_DB: ${POSTGRES_DB:-mcore}
+0029:       POSTGRES_USER: ${POSTGRES_USER:-mcore}
+0030: [REDACTED: sensitive configuration line]
+0031:     volumes: [postgres_data:/var/lib/postgresql/data]
+0032:     networks: [app_internal]
+0033:     healthcheck:
+0034:       test: ["CMD-SHELL", "pg_isready -U mcore -d mcore"]
+0035:       interval: 10s
+0036:       timeout: 5s
+0037:       retries: 5
+0038:     restart: unless-stopped
+0039: 
+0040:   qdrant:
+0041:     image: qdrant/qdrant:latest
+0042:     volumes: [qdrant_data:/qdrant/storage]
+0043:     networks: [app_internal]
+0044:     restart: unless-stopped
+0045: 
+0046:   cloudflared:
+0047:     image: cloudflare/cloudflared:latest
+0048:     profiles: ["edge"]
+0049:     command: ["tunnel", "--no-autoupdate", "run"]
+0050:     environment:
+0051: [REDACTED: sensitive configuration line]
+0052:     networks: [edge]
+0053:     restart: unless-stopped
+0054: 
+0055: networks:
+0056:   edge:
+0057:     driver: bridge
+0058:   app_internal:
+0059:     driver: bridge
+0060:     internal: true
+0061: 
+0062: volumes:
+0063:   postgres_data:
+0064:   qdrant_data:
+
+=================================================================
+FILE: .env.example
+=================================================================
+0001: [REDACTED: sensitive configuration line]
+0002: APP_ENV=staging
+0003: COMPOSE_PROJECT_NAME=mcore-nativebox
+0004: WEB_PORT=3000
+0005: API_PORT=8000
+0006: POSTGRES_DB=mcore
+0007: POSTGRES_USER=mcore
+0008: [REDACTED: sensitive configuration line]
+0009: [REDACTED: sensitive configuration line]
+
+=================================================================
+FILE: .gitignore
+=================================================================
+0001: .env
+0002: .env.*
+0003: !.env.example
+0004: *.pem
+0005: *.key
+0006: *.p12
+0007: *.pfx
+0008: [REDACTED: sensitive configuration line]
+0009: [REDACTED: sensitive configuration line]
+0010: evidence/local/
+0011: backups/
+0012: *.log
+0013: *.pid
+0014: .DS_Store
+0015: node_modules/
+0016: .next/
+0017: dist/
+0018: build/
+0019: .venv/
+0020: __pycache__/
+0021: .pytest_cache/
+0022: .mypy_cache/
+0023: .ruff_cache/
+0024: coverage/
+0025: htmlcov/
+0026: .idea/
+0027: .vscode/
+
+=================================================================
+FILE: infra/cloudflare/README.md
+=================================================================
+0001: # Cloudflare integration boundary
+0002: 
+0003: Target hostname: ais.shorborno.ai
+0004: 
+0005: Design target only: no tunnel, DNS record, Access policy or public route has been created by this repository bootstrap.
+0006: 
+0007: - Prefer a remotely managed Cloudflare Tunnel with a narrowly scoped hostname route.
+0008: [REDACTED: sensitive configuration line]
+0009: - Keep PostgreSQL, Qdrant, Docker API and administration endpoints off public ingress.
+0010: - Route only the intended web service; use Access for private administration.
+0011: - Confirm the zone and hostname are controlled by the account owner before DNS changes.
+0012: - Verify tunnel health before production routing.
+0013: [REDACTED: sensitive configuration line]
+0014: 
+0015: Official setup: https://developers.cloudflare.com/tunnel/get-started/
+
+=================================================================
+FILE: docs/deployment/staged-rollout.md
+=================================================================
+0001: # MCore staged rollout — MCORE-ONECMD-DELIVERY-001
+0002: 
+0003: ## Current gate
+0004: Repository bootstrap only. The ZIP has not been inspected/imported. No deployment is authorized.
+0005: 
+0006: ## Stage 0 — Preserve and inspect
+0007: - Preserve the ZIP unchanged and record SHA-256.
+0008: - List archive contents before extraction.
+0009: - Reject absolute paths, parent traversal and symlinks escaping extraction root.
+0010: - Extract into a new review directory; never overwrite existing files.
+0011: - Compare archive contents with repository paths and generate a missing-file report.
+0012: 
+0013: ## Stage 1 — Static audit
+0014: - Run scripts/audit-repo.sh and scripts/validate-compose.sh .env.example.
+0015: - Inspect Dockerfiles, dependency lockfiles, container users, ports, volumes and health checks.
+0016: - Verify PostgreSQL and Qdrant are not published on host interfaces.
+0017: [REDACTED: sensitive configuration line]
+0018: 
+0019: ## Stage 2 — Local build and tests
+0020: - Build images without starting production services.
+0021: - Run tests in isolation.
+0022: - Verify Python/Node versions from manifests and lockfiles.
+0023: - Verify Playwright browser dependencies and sandbox isolation.
+0024: - Record commit SHA, image digests and test results.
+0025: 
+0026: ## Stage 3 — Staging
+0027: [REDACTED: sensitive configuration line]
+0028: - Require explicit approval before starting containers or changing network state.
+0029: - Keep databases private and production hostname unchanged.
+0030: [REDACTED: sensitive configuration line]
+0031: 
+0032: ## Stage 4 — Production approval
+0033: AIS must explicitly approve the exact release commit, affected services, hostname, rollback plan and cost implications. Approval for one release does not authorize future releases or paid provisioning.
+0034: 
+0035: ## Stage 5 — Production verification
+0036: - Verify tunnel health and hostname routing.
+0037: - Verify application health externally.
+0038: - Verify access controls and no unintended database exposure.
+0039: - Test backup restoration and rollback.
+0040: - Store redacted evidence and record AIS acceptance separately.
+0041: 
+0042: ## Rollback
+0043: Use a previously tested release by immutable commit/image digest. Database migrations require a documented compatibility or restore plan; do not blindly roll back persistent data.
+
+=================================================================
+FILE: .github/workflows/ci.yml
+=================================================================
+0001: name: MCore CI
+0002: 
+0003: on:
+0004:   pull_request:
+0005:     branches: [main]
+0006:   push:
+0007:     branches: [main, "feat/**", "fix/**"]
+0008: 
+0009: permissions: {}
+0010: 
+0011: jobs:
+0012:   repository-audit:
+0013:     runs-on: ubuntu-latest
+0014:     permissions:
+0015:       contents: read
+0016:     steps:
+0017:       - name: Checkout source
+0018:         uses: actions/checkout@v5
+0019: 
+0020:       - name: Verify bootstrap files
+0021:         shell: bash
+0022:         run: |
+0023:           set -euo pipefail
+0024:           test -f README.md
+0025:           test -f .gitignore
+0026:           test -f .env.example
+0027:           test -f docker-compose.yml
+0028:           test -f scripts/audit-repo.sh
+0029:           test -f scripts/validate-compose.sh
+0030:           test -f scripts/deploy.sh
+0031:           test -f docs/deployment/staged-rollout.md
+0032: 
+0033: [REDACTED: sensitive configuration line]
+0034:         shell: bash
+0035:         run: |
+0036:           set -euo pipefail
+0037:           if git ls-files | grep -E '(^|/)(\.env|\.env\..+|id_rsa|.*\.pem|.*\.key)$' | grep -vE '(^|/)\.env\.example$'; then
+0038: [REDACTED: sensitive configuration line]
+0039:             exit 1
+0040:           fi
+0041: 
+0042:       - name: Validate Compose model
+0043:         run: docker compose --env-file .env.example -f docker-compose.yml config --quiet
+0044: 
+0045:       - name: Report provisional status
+0046:         run: |
+0047:           echo "Bootstrap validation only."
+0048:           echo "Application build, tests and production deployment are not certified."
+
+=================================================================
+FILE: .github/workflows/staging-preflight.yml
+=================================================================
+0001: name: MCore Staging Preflight
+0002: 
+0003: on:
+0004:   workflow_dispatch:
+0005: 
+0006: permissions: {}
+0007: 
+0008: jobs:
+0009:   preflight:
+0010:     runs-on: ubuntu-latest
+0011:     permissions:
+0012:       contents: read
+0013:     steps:
+0014:       - name: Checkout source
+0015:         uses: actions/checkout@v5
+0016: 
+0017:       - name: Validate Compose configuration only
+0018:         run: docker compose --env-file .env.example -f docker-compose.yml config --quiet
+0019: 
+0020:       - name: Detect missing application deliverables
+0021:         shell: bash
+0022:         run: |
+0023:           set -euo pipefail
+0024:           missing=0
+0025:           for path in apps/web/Dockerfile apps/sandbox/Dockerfile services/orchestrator/Dockerfile; do
+0026:             if [[ -f "$path" ]]; then
+0027:               echo "[FOUND] $path"
+0028:             else
+0029:               echo "[MISSING] $path"
+0030:               missing=1
+0031:             fi
+0032:           done
+0033:           if [[ "$missing" -ne 0 ]]; then
+0034:             echo "Preflight blocked: import and inspect the application ZIP before building or deploying."
+0035:             exit 1
+0036:           fi
+0037: 
+0038:       - name: Explicitly report no deployment
+0039:         run: echo "Preflight only. No services, DNS records, tunnels, or production resources were changed."
+
+=================================================================
+FILE: scripts/audit-repo.sh
+=================================================================
+0001: #!/usr/bin/env bash
+0002: set -Eeuo pipefail
+0003: ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+0004: cd "$ROOT"
+0005: required=(README.md .gitignore .env.example docker-compose.yml Makefile scripts/audit-repo.sh scripts/validate-compose.sh scripts/deploy.sh .github/workflows/ci.yml docs/deployment/staged-rollout.md apps/web/Dockerfile apps/sandbox/Dockerfile services/orchestrator/Dockerfile infra/cloudflare/README.md)
+0006: missing=0
+0007: printf 'MCORE-ONECMD-DELIVERY-001 repository audit\nRoot: %s\n\n' "$ROOT"
+0008: for path in "${required[@]}"; do
+0009:   if [[ -f "$path" ]]; then printf '[FOUND]   %s\n' "$path"
+0010:   else printf '[MISSING] %s\n' "$path"; missing=$((missing + 1)); fi
+0011: done
+0012: printf '\nMissing required files: %s\n' "$missing"
+0013: if git ls-files | grep -E '(^|/)(\.env|\.env\..+|id_rsa|.*\.pem|.*\.key)
+0014: [REDACTED: sensitive configuration line]
+0015: fi
+0016: if [[ -f docker-compose.yml ]] && command -v docker >/dev/null 2>&1; then
+0017:   docker compose --env-file .env.example -f docker-compose.yml config --quiet || { printf '[FAIL] Compose configuration is invalid.\n'; exit 2; }
+0018:   printf '[PASS] Compose configuration syntax is valid.\n'
+0019: elif ! command -v docker >/dev/null 2>&1; then
+0020:   printf '[SKIP] Docker unavailable; Compose validation not run.\n'
+0021: fi
+0022: if (( missing > 0 )); then
+0023:   printf '\n[INCOMPLETE] Import and inspect the application ZIP before build/deploy.\n'
+0024:   exit 1
+0025: fi
+0026: printf '\n[PASS] Required-file presence check passed; not production acceptance.\n'
+0027:  | grep -vE '(^|/)\.env\.example
+0028: [REDACTED: sensitive configuration line]
+0029: fi
+0030: if [[ -f docker-compose.yml ]] && command -v docker >/dev/null 2>&1; then
+0031:   docker compose --env-file .env.example -f docker-compose.yml config --quiet || { printf '[FAIL] Compose configuration is invalid.\n'; exit 2; }
+0032:   printf '[PASS] Compose configuration syntax is valid.\n'
+0033: elif ! command -v docker >/dev/null 2>&1; then
+0034:   printf '[SKIP] Docker unavailable; Compose validation not run.\n'
+0035: fi
+0036: if (( missing > 0 )); then
+0037:   printf '\n[INCOMPLETE] Import and inspect the application ZIP before build/deploy.\n'
+0038:   exit 1
+0039: fi
+0040: printf '\n[PASS] Required-file presence check passed; not production acceptance.\n'
+0041:  >/dev/null; then
+0042: [REDACTED: sensitive configuration line]
+0043: fi
+0044: if [[ -f docker-compose.yml ]] && command -v docker >/dev/null 2>&1; then
+0045:   docker compose --env-file .env.example -f docker-compose.yml config --quiet || { printf '[FAIL] Compose configuration is invalid.\n'; exit 2; }
+0046:   printf '[PASS] Compose configuration syntax is valid.\n'
+0047: elif ! command -v docker >/dev/null 2>&1; then
+0048:   printf '[SKIP] Docker unavailable; Compose validation not run.\n'
+0049: fi
+0050: if (( missing > 0 )); then
+0051:   printf '\n[INCOMPLETE] Import and inspect the application ZIP before build/deploy.\n'
+0052:   exit 1
+0053: fi
+0054: printf '\n[PASS] Required-file presence check passed; not production acceptance.\n'
+
+=================================================================
+FILE: scripts/audit-zip.sh
+=================================================================
+0001: #!/usr/bin/env bash
+0002: set -Eeuo pipefail
+0003: ARCHIVE="${1:-}"
+0004: [[ -n "$ARCHIVE" && -f "$ARCHIVE" ]] || {
+0005:   echo "Usage: bash scripts/audit-zip.sh /path/to/mcore-architecture.zip" >&2
+0006:   exit 2
+0007: }
+0008: command -v unzip >/dev/null 2>&1 || { echo "unzip is required." >&2; exit 2; }
+0009: command -v sha256sum >/dev/null 2>&1 || { echo "sha256sum is required." >&2; exit 2; }
+0010: echo "Archive: $ARCHIVE"
+0011: sha256sum "$ARCHIVE"
+0012: tmp="$(mktemp)"
+0013: trap 'rm -f "$tmp"' EXIT
+0014: unzip -Z1 "$ARCHIVE" > "$tmp"
+0015: printf '\nEntry count: '
+0016: wc -l < "$tmp"
+0017: unsafe=0
+0018: while IFS= read -r path; do
+0019:   case "$path" in
+0020:     /*|../*|*/../*|*/..)
+0021:       printf '[UNSAFE PATH] %s\n' "$path"; unsafe=1 ;;
+0022:   esac
+0023:   case "$path" in
+0024:     .env|*/.env|.env.*|*/.env.*|*.pem|*.key|*/id_rsa|*/id_ed25519)
+0025: [REDACTED: sensitive configuration line]
+0026:   esac
+0027: done < "$tmp"
+0028: echo
+0029: echo "Top-level paths:"
+0030: awk -F/ 'NF { print $1 }' "$tmp" | sort -u
+0031: if (( unsafe )); then
+0032:   echo "REJECT: unsafe archive paths found. Do not extract this archive." >&2
+0033:   exit 3
+0034: fi
+0035: [REDACTED: sensitive configuration line]
+
+=================================================================
+FILE: scripts/deploy.sh
+=================================================================
+0001: #!/usr/bin/env bash
+0002: set -Eeuo pipefail
+0003: ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+0004: cd "$ROOT"
+0005: MODE="${1:---preflight}"
+0006: 
+0007: require_approved_release() {
+0008:   [[ "${MCORE_DEPLOY_APPROVED:-}" == "YES" ]] || {
+0009:     echo "Blocked: separate explicit AIS release approval is required." >&2; exit 3;
+0010:   }
+0011:   [[ -f .env ]] || { echo "Blocked: local .env is required." >&2; exit 3; }
+0012:   [[ -z "$(git status --porcelain)" ]] || {
+0013:     echo "Blocked: working tree must be clean and release commit recorded." >&2; exit 3;
+0014:   }
+0015: [REDACTED: sensitive configuration line]
+0016: [REDACTED: sensitive configuration line]
+0017:   fi
+0018: }
+0019: 
+0020: case "$MODE" in
+0021:   --preflight)
+0022:     echo "Preflight only; no services will be started."
+0023:     bash scripts/validate-compose.sh .env.example
+0024:     bash scripts/audit-repo.sh || { echo "Repository incomplete. Deployment blocked." >&2; exit 1; }
+0025:     echo "Preflight complete. No deployment performed."
+0026:     ;;
+0027:   --apply)
+0028:     require_approved_release
+0029:     read -r -p "Type AIS-APPROVE-LOCAL to start the approved local/staging stack: " approval
+0030:     [[ "$approval" == "AIS-APPROVE-LOCAL" ]] || { echo "Cancelled."; exit 4; }
+0031:     bash scripts/audit-repo.sh
+0032:     bash scripts/validate-compose.sh .env
+0033:     docker compose --env-file .env -f docker-compose.yml up -d --build
+0034:     echo "Local/staging Compose command completed. Cloudflare edge profile was not started."
+0035:     ;;
+0036:   --publish-edge)
+0037:     require_approved_release
+0038:     [[ "${MCORE_PUBLIC_ROUTE_APPROVED:-}" == "YES" ]] || {
+0039:       echo "Blocked: explicit approval for public edge exposure is required." >&2; exit 3;
+0040:     }
+0041:     [[ "${MCORE_APPROVED_HOSTNAME:-}" == "ais.shorborno.ai" ]] || {
+0042:       echo "Blocked: set MCORE_APPROVED_HOSTNAME=ais.shorborno.ai only after verifying the intended route." >&2; exit 3;
+0043:     }
+0044: [REDACTED: sensitive configuration line]
+0045: [REDACTED: sensitive configuration line]
+0046:     }
+0047:     read -r -p "Type PUBLISH ais.shorborno.ai to start the approved edge connector: " approval
+0048:     [[ "$approval" == "PUBLISH ais.shorborno.ai" ]] || { echo "Cancelled."; exit 4; }
+0049:     bash scripts/validate-compose.sh .env
+0050:     docker compose --env-file .env --profile edge -f docker-compose.yml up -d cloudflared
+0051:     echo "Edge connector command completed. Verify Cloudflare route and Access policy independently."
+0052:     ;;
+0053:   *)
+0054:     echo "Usage: bash scripts/deploy.sh [--preflight|--apply|--publish-edge]" >&2; exit 2
+0055:     ;;
+0056: esac
+
+=================================================================
+FILE: scripts/validate-compose.sh
+=================================================================
+0001: #!/usr/bin/env bash
+0002: set -Eeuo pipefail
+0003: ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+0004: cd "$ROOT"
+0005: command -v docker >/dev/null 2>&1 || { echo "ERROR: Docker is required." >&2; exit 2; }
+0006: [[ -f docker-compose.yml ]] || { echo "ERROR: docker-compose.yml not found." >&2; exit 2; }
+0007: ENV_FILE="${1:-.env.example}"
+0008: [[ -f "$ENV_FILE" ]] || { echo "ERROR: env file '$ENV_FILE' not found." >&2; exit 2; }
+0009: docker compose --env-file "$ENV_FILE" -f docker-compose.yml config --quiet
+0010: echo "PASS: Compose model validates; no containers were started."

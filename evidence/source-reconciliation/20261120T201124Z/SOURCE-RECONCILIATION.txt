@@ -1,0 +1,10 @@
+=== MCORE SOURCE RECONCILIATION ===
+UTC: 20261120T201124Z
+ROOT: /srv/mcore/shorbornoBD-NativeBox
+MODE: READ-ONLY
+
+=== 1. GIT BASELINE ===
+fatal: detected dubious ownership in repository at '/srv/mcore/shorbornoBD-NativeBox'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /srv/mcore/shorbornoBD-NativeBox

@@ -1,0 +1,13 @@
+.env.example
+.github/workflows/ci.yml
+.github/workflows/staging-preflight.yml
+.gitignore
+Makefile
+README.md
+docker-compose.yml
+docs/deployment/staged-rollout.md
+infra/cloudflare/README.md
+scripts/audit-repo.sh
+scripts/audit-zip.sh
+scripts/deploy.sh
+scripts/validate-compose.sh

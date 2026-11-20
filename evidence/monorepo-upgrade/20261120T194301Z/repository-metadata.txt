@@ -1,0 +1,54 @@
+
+REPOSITORY: /srv/mcore/AIS-PRO
+main
+COMMIT: b196f13 fix(ui): implement Native Three.js, Cytoscape, ECharts error boundary and resolve React 19 unused import
+origin
+## main
+
+REPOSITORY: /srv/mcore
+main
+COMMIT: 02a1ada feat(voice-console): upgrade v0.7 with FastAPI, xterm.js PTY WebSocket, local_storage file manager, and 3-column ROI UI
+origin
+## main
+ M apps/web/package.json
+ M apps/web/pnpm-lock.yaml
+ m mcore365
+ M pnpm-lock.yaml
+ ? shorbornoBD-NativeBox
+ M workspace-360/frontend/src/app/store.ts
+ M workspace-360/frontend/src/components/AudioToolbar.tsx
+?? AIS-PRO/
+?? apps/voice-console/local_storage/
+?? apps/web/components/AudioControlToolbar.tsx
+?? apps/web/store/
+?? docs/AIS-Strict-Fabric-Stage-360Drive/
+?? evidence/shorbornoai-reconciliation/
+?? scripts/mcore-shorborno-recon.sh
+?? scripts/mcore-shorborno-recon.sh.authfix.20261120T191155Z
+?? scripts/mcore-shorborno-recon.sh.authfix.20261120T191351Z
+?? scripts/mcore-shorborno-recon.sh.backup.20261120T185904Z
+?? scripts/mcore-shorborno-recon.sh.backup.20261120T191554Z
+?? scripts/provision-sorborno-subdomains.sh
+
+REPOSITORY: /srv/mcore/mcore365
+main
+COMMIT: 4c51909 refactor(security): quarantine .env secrets and consolidate mcp-gateway & cf-ai-worker into mcoresec/apps
+origin
+## main...origin/main
+ M sandbox/apps/web/package-lock.json
+ M sandbox/apps/web/package.json
+ M sandbox/services/ingestion/requirements.txt
+
+REPOSITORY: /srv/mcore/mcore-custom-nativebox
+main
+COMMIT: 7f3397e Merge pull request #1 from aminul-du/feat/mcore-onecmd-delivery-001
+origin
+## main...origin/main
+
+REPOSITORY: /srv/mcore/shorbornoBD-NativeBox
+main
+COMMIT: 7f3397e Merge pull request #1 from aminul-du/feat/mcore-onecmd-delivery-001
+origin
+upstream
+## main...origin/main
+?? evidence/

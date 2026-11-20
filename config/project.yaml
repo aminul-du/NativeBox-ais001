@@ -1,0 +1,50 @@
+schema_version: "1.0"
+project:
+  id: "MCORE-SHORBORNO-NATIVEBOX"
+  name: "Shorborno NativeBox"
+  root: "/srv/mcore/shorbornoBD-NativeBox"
+  repository_type: "standalone-monorepo"
+  default_branch: "main"
+  owner: "AIS"
+  status: "devops-readiness-in-progress"
+
+governance:
+  final_authority: "AIS"
+  production_approval_required: true
+  paid_operations_require_explicit_approval: true
+  deployment_requires_evidence: true
+
+isolation:
+  canonical_root_only: true
+  automatic_external_file_import: false
+  follow_external_symlinks: false
+  preserve_git_history: true
+  secrets_in_repository: false
+
+domains:
+  primary_legacy_domain: "sorbornoai.com"
+  second_domain: "UNVERIFIED_PENDING_AIS_CONFIRMATION"
+  preserve_existing_redirect: true
+  dns_modification_authorized: false
+
+cloudflare:
+  integration: "existing-account"
+  account_id: "REDACTED_NOT_STORED"
+  tunnel:
+    preserve_existing: true
+    modification_authorized: false
+  workers_ai:
+    execution: "cloudflare-managed"
+    local_adapter: "ai/workers-ai"
+  inventory_status: "pending_evidence_reconciliation"
+
+deployment:
+  strategy: "staged"
+  staging_enabled_by_existing_pipeline: "pending-audit"
+  production_authorized: false
+  rollback_required: true
+
+security:
+  secret_storage: "runtime-environment-or-secret-manager"
+  commit_credentials: false
+  audit_evidence_required: true

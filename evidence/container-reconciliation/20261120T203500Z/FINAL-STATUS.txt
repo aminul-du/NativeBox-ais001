@@ -1,0 +1,2 @@
+[BLOCKED] Source/Dockerfile reconciliation found unresolved service prerequisites. No partial stack will be started.
+CONTAINERS_STARTED=NO
